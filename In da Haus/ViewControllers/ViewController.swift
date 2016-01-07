@@ -28,7 +28,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         initMap()
 
-        self.locationManager.startMonitoringForRegion(CLCircularRegion(center: CLLocationCoordinate2DMake(42.3673379, -71.0809888), radius: 100, identifier: "Intrepid"))
+        self.locationManager.startMonitoringForRegion(CLCircularRegion(center: CLLocationCoordinate2DMake(42.3673379, -71.0809888), radius: 50, identifier: "The Mothership"))
+        self.locationManager.startMonitoringForRegion(CLCircularRegion(center: CLLocationCoordinate2DMake(42.366471,  -71.078118), radius: 50, identifier: "Rogers"))
         
     }
 
@@ -64,16 +65,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("Updating")
     }
+    
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        print("Entered")
-        sendMessageToSlack()
+        print("Entered \(region.identifier)")
+        sendMessageToSlack(region.identifier)
     }
     
     func locationManager(manager: CLLocationManager, didStartMonitoringForRegion region: CLRegion) {
-        print("Monitoring")
-        print(region)
+        print("Monitoring \(region.identifier)")
     }
      func locationManager(manager: CLLocationManager,
         monitoringDidFailForRegion region: CLRegion?,
@@ -81,12 +81,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             print("Something went wrong")
     }
     
-    func sendMessageToSlack() {
+    func sendMessageToSlack(office: String) {
         let parameters = [
-            "text": "Liz is at The Mothership!",
+            "text": "Liz is at \(office)!",
         ]
         
-        Alamofire.request(.POST, "https://hooks.slack.com/services/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", parameters: parameters, encoding: .JSON)
+        Alamofire.request(.POST, "https://hooks.slack.com/services/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", parameters: parameters, encoding: .JSON)
     }
 
 }
