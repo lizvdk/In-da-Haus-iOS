@@ -54,14 +54,38 @@
 		C0CFFD8C1C3F035800C97F18 /* In da Haus */ = {
 			isa = PBXGroup;
 			children = (
+				C0CFFDA01C3F060400C97F18 /* Models */,
+				C0CFFDA11C3F060400C97F18 /* Networking */,
+				C0CFFD9F1C3F041E00C97F18 /* ViewControllers */,
 				C0CFFD8D1C3F035800C97F18 /* AppDelegate.swift */,
-				C0CFFD8F1C3F035800C97F18 /* ViewController.swift */,
-				C0CFFD911C3F035800C97F18 /* Main.storyboard */,
 				C0CFFD941C3F035800C97F18 /* Assets.xcassets */,
-				C0CFFD961C3F035800C97F18 /* LaunchScreen.storyboard */,
 				C0CFFD991C3F035800C97F18 /* Info.plist */,
+				C0CFFD961C3F035800C97F18 /* LaunchScreen.storyboard */,
+				C0CFFD911C3F035800C97F18 /* Main.storyboard */,
 			);
 			path = "In da Haus";
+			sourceTree = "<group>";
+		};
+		C0CFFD9F1C3F041E00C97F18 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C0CFFD8F1C3F035800C97F18 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		C0CFFDA01C3F060400C97F18 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C0CFFDA11C3F060400C97F18 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +173,7 @@
 				C0CFFD921C3F035800C97F18 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		C0CFFD961C3F035800C97F18 /* LaunchScreen.storyboard */ = {
@@ -157,6 +182,7 @@
 				C0CFFD971C3F035800C97F18 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -286,6 +312,7 @@
 				C0CFFD9E1C3F035800C97F18 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
