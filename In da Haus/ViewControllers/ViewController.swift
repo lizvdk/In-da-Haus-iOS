@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Alamofire
 
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
@@ -67,6 +68,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered")
+        sendMessageToSlack()
     }
     
     func locationManager(manager: CLLocationManager, didStartMonitoringForRegion region: CLRegion) {
@@ -77,6 +79,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         monitoringDidFailForRegion region: CLRegion?,
         withError error: NSError) {
             print("Something went wrong")
+    }
+    
+    func sendMessageToSlack() {
+        let parameters = [
+            "text": "Liz is at The Mothership!",
+        ]
+        
+        Alamofire.request(.POST, "https://hooks.slack.com/services/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", parameters: parameters, encoding: .JSON)
     }
 
 }

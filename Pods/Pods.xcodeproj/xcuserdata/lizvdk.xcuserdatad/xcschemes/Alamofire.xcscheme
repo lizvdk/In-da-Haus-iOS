@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C7159D51645758DE520E879C'
-               BlueprintName = 'IntrepidSwiftWisdom'
+               BlueprintIdentifier = 'A8E4C4CD93AF40EBD4226E39'
+               BlueprintName = 'Alamofire'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'IntrepidSwiftWisdom.framework'>
+               BuildableName = 'Alamofire.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

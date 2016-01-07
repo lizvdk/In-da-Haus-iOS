@@ -8,3 +8,5 @@ use_frameworks!
 pod 'MBProgressHUD'
 
 pod 'IntrepidSwiftWisdom'
+
+pod 'Alamofire', '~> 3.0'
