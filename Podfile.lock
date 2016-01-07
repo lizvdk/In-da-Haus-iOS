@@ -1,0 +1,15 @@
+PODS:
+  - IntrepidSwiftWisdom (0.0.12):
+    - IntrepidSwiftWisdom/Core (= 0.0.12)
+  - IntrepidSwiftWisdom/Core (0.0.12)
+  - MBProgressHUD (0.9.2)
+
+DEPENDENCIES:
+  - IntrepidSwiftWisdom
+  - MBProgressHUD
+
+SPEC CHECKSUMS:
+  IntrepidSwiftWisdom: 28dabc7cc58fcd4e8b7b23e9d381e03dd11a1ea7
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+
+COCOAPODS: 0.39.0

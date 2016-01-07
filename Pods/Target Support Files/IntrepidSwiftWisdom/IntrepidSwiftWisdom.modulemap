@@ -1,0 +1,6 @@
+framework module IntrepidSwiftWisdom {
+  umbrella header "IntrepidSwiftWisdom-umbrella.h"
+
+  export *
+  module * { export * }
+}
