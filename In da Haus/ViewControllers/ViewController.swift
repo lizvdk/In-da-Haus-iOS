@@ -12,32 +12,23 @@ import CoreLocation
 import Alamofire
 
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
-    
+	
+	// MARK: Properties
+	
     var locationManager = CLLocationManager()
-    
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.locationManager.delegate = self
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.distanceFilter = kCLDistanceFilterNone
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.startUpdatingLocation()
-        
+		
+        initLocationTracking()
+		initRegionMonitoring()
         initMap()
-
-        self.locationManager.startMonitoringForRegion(CLCircularRegion(center: CLLocationCoordinate2DMake(42.3673379, -71.0809888), radius: 50, identifier: "The Mothership"))
-        self.locationManager.startMonitoringForRegion(CLCircularRegion(center: CLLocationCoordinate2DMake(42.366471,  -71.078118), radius: 50, identifier: "Rogers"))
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+	
+	// MARK: Map
+	
     func initMap() {
         let initialLocation = CLLocation(latitude: 42.3673379, longitude: -71.0809888)
         let regionRadius: CLLocationDistance = 500
@@ -48,7 +39,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
         centerMapOnLocation(initialLocation)
     }
-    
+	
+	// MARK: Location Tracking
+	
+	func initLocationTracking() {
+		self.locationManager.delegate = self
+		self.locationManager.requestAlwaysAuthorization()
+		self.locationManager.distanceFilter = kCLDistanceFilterNone
+		self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+		self.locationManager.startUpdatingLocation()
+	}
+	
+	func initRegionMonitoring() {
+		self.locationManager.startMonitoringForRegion(CLCircularRegion(center: CLLocationCoordinate2DMake(42.3673379, -71.0809888), radius: 50, identifier: "The Mothership"))
+		self.locationManager.startMonitoringForRegion(CLCircularRegion(center: CLLocationCoordinate2DMake(42.366471,  -71.078118), radius: 50, identifier: "Rogers"))
+	}
+	
+	// MARK: CLLocationManagerDelegate
+	
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         mapView.showsUserLocation = (status == .AuthorizedAlways)
     }
@@ -64,6 +72,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         self.presentViewController(alertController, animated: true) {
         }
     }
+	
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     }
     
@@ -87,12 +96,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     func locationManager(manager: CLLocationManager, didStartMonitoringForRegion region: CLRegion) {
         print("Monitoring \(region.identifier)")
     }
-     func locationManager(manager: CLLocationManager,
-        monitoringDidFailForRegion region: CLRegion?,
-        withError error: NSError) {
-            print("Something went wrong")
-    }
-    
+	
+	func locationManager(manager: CLLocationManager,
+		monitoringDidFailForRegion region: CLRegion?,
+		withError error: NSError) {
+			print("Something went wrong")
+	}
+	
+	// MARK: Slack
+
     func sendMessageToSlack(office: String) {
         let parameters = [
             "text": "Liz is at \(office)!",
