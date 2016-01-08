@@ -69,7 +69,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered \(region.identifier)")
-        sendMessageToSlack(region.identifier)
+        let alertController = UIAlertController(title: "Entered \(region.identifier)", message: "Tell Slack?", preferredStyle: .Alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            self.sendMessageToSlack(region.identifier)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+        }
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        self.presentViewController(alertController, animated: true) {
+        }
     }
     
     func locationManager(manager: CLLocationManager, didStartMonitoringForRegion region: CLRegion) {
