@@ -63,12 +63,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 	
 	func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
 		print("didFailWithError: \(error.description)")
+		
 		let alertController = UIAlertController(title: "Error", message: "We could not determine your location.", preferredStyle: .Alert)
-		
-		let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+		let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
 		}
+		alertController.addAction(okAction)
 		
-		alertController.addAction(OKAction)
 		self.presentViewController(alertController, animated: true) {
 		}
 	}
@@ -78,19 +78,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 	
 	func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
 		print("Entered \(region.identifier)")
-		let alertController = UIAlertController(title: "Entered \(region.identifier)", message: "Tell Slack?", preferredStyle: .Alert)
-		
-		let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-			self.sendMessageToSlack(region.identifier)
-		}
-		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-		}
-		
-		alertController.addAction(okAction)
-		alertController.addAction(cancelAction)
-		self.presentViewController(alertController, animated: true) {
-		}
+		alertOfficeEntered(region.identifier)
+
 	}
 	
 	func locationManager(manager: CLLocationManager, didStartMonitoringForRegion region: CLRegion) {
@@ -101,6 +90,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 		monitoringDidFailForRegion region: CLRegion?,
 		withError error: NSError) {
 			print("Something went wrong")
+	}
+	
+	// MARK: Office Entered Alert
+	
+	func alertOfficeEntered(office: String) {
+		let alertController = UIAlertController(title: "Entered \(office)", message: "Tell Slack?", preferredStyle: .Alert)
+		let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+			self.sendMessageToSlack(office)
+		}
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+		}
+		alertController.addAction(okAction)
+		alertController.addAction(cancelAction)
+		
+		self.presentViewController(alertController, animated: true) {
+		}
 	}
 	
 	// MARK: Slack
