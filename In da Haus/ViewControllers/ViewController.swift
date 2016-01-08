@@ -111,6 +111,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 		]
 		
 		Alamofire.request(.POST, "https://hooks.slack.com/services/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", parameters: parameters, encoding: .JSON)
+			.responseString { response in
+				if response.result.isFailure {
+					print("To do: alert slack error")
+				}
+		}
 	}
 	
 }
