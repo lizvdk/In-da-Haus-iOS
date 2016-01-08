@@ -16,7 +16,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 	// MARK: Properties
 	
 	var locationManager = CLLocationManager()
+	
+	let intrepidMothershipCoordinates = (latitude: 42.3673379, longitude: -71.0809888)
+	let intrepidRogersCoordinates = (latitude: 42.366471, longitude: -71.078118)
+	let monitoringRadius = 50.0
+	
 	@IBOutlet weak var mapView: MKMapView!
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -51,8 +57,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 	}
 	
 	func initRegionMonitoring() {
-		self.locationManager.startMonitoringForRegion(CLCircularRegion(center: CLLocationCoordinate2DMake(42.3673379, -71.0809888), radius: 50, identifier: "The Mothership"))
-		self.locationManager.startMonitoringForRegion(CLCircularRegion(center: CLLocationCoordinate2DMake(42.366471,  -71.078118), radius: 50, identifier: "Rogers"))
+		self.locationManager.startMonitoringForRegion(CLCircularRegion(center: CLLocationCoordinate2DMake(intrepidMothershipCoordinates.latitude, intrepidMothershipCoordinates.longitude), radius: monitoringRadius, identifier: "The Mothership"))
+		self.locationManager.startMonitoringForRegion(CLCircularRegion(center: CLLocationCoordinate2DMake(intrepidRogersCoordinates.latitude, intrepidRogersCoordinates.longitude), radius: monitoringRadius, identifier: "Rogers"))
 	}
 	
 	// MARK: CLLocationManagerDelegate
